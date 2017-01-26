@@ -263,6 +263,44 @@ app.post('/addPizza', function(request, response)
 });
 
 //INSERIRE CODICE QUI SOTTO
+/**
+ * @brief update the price of pizzas under/over a price
+ * @return the pizzas updated
+ */
+app.post('/updatePizzasByPrice', function(request, response) 
+{	
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+	
+	var pizzaLower;
+	var pizzaPrice;
+	var pizzaIncrement;
+    
+	//check body and parameters
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+		if ( typeof request.body.increment !== 'undefined' && request.body.increment &&
+			 typeof request.body.lower !== 'undefined' && request.body.lower &&
+			 typeof request.body.price !== 'undefined' && request.body.price)
+            {
+              pizzaLower = request.body.increment;
+              pizzaPrice = parseFloat(request.body.price);
+			        pizzaIncrement = parseFloat(request.body.increment);
+			        var pizza = pizzaManager.searchPizzaPrice(pizzaPrince, pizzaIncrement, pizzaLower);
+			        if (pizza != null)
+			        {
+			          response.writeHead(200, headers);
+			          response.end(JSON.stringify(pizza));
+			          }
+    }
+	}
+});
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
