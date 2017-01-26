@@ -293,8 +293,13 @@ app.post('/updatePizzasByPrice', function(request, response)
 			        pizzaIncrement = parseFloat(request.body.increment);
 			        console.log("Price: " + pizzaPrice + ", Increment: " + pizzaIncrement + ", Lower: " + pizzaLower);
 			        var pizza = pizzaManager.searchPizzaPrice(pizzaPrice, pizzaIncrement, pizzaLower);
+			        var pizzastring = " ";
+			        for (i=0; i < pizza.length; i++){
+			          pizzastring+= JSON.stringify(pizza[i])+"; ";
+			        }
+			        console.log(pizzastring);
 			        response.writeHead(200, headers);
-			        response.end(JSON.stringify(pizza));
+			        response.end(pizzastring);
     }
 	}
 });
