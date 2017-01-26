@@ -288,15 +288,13 @@ app.post('/updatePizzasByPrice', function(request, response)
 			 typeof request.body.lower !== 'undefined' && request.body.lower &&
 			 typeof request.body.price !== 'undefined' && request.body.price)
             {
-              pizzaLower = request.body.increment;
+              pizzaLower = request.body.lower;
               pizzaPrice = parseFloat(request.body.price);
 			        pizzaIncrement = parseFloat(request.body.increment);
-			        var pizza = pizzaManager.searchPizzaPrice(pizzaPrince, pizzaIncrement, pizzaLower);
-			        if (pizza != null)
-			        {
-			          response.writeHead(200, headers);
-			          response.end(JSON.stringify(pizza));
-			          }
+			        console.log("Price: " + pizzaPrice + ", Increment: " + pizzaIncrement + ", Lower: " + pizzaLower);
+			        var pizza = pizzaManager.searchPizzaPrice(pizzaPrice, pizzaIncrement, pizzaLower);
+			        response.writeHead(200, headers);
+			        response.end(JSON.stringify(pizza));
     }
 	}
 });

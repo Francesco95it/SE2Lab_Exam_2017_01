@@ -141,13 +141,13 @@ var insertPizza = function insertPizza(pizza)
 var searchPizzaPrice = function searchPizzaPrice(price, increment, lower)
 {
   var pizzas = [];
-  if (lower){
+  if (lower==true){
     for (i=0; i < menu.length; i++)
   	{
       if (menu[i].price < price)
       {
   			menu[i].price+=increment;
-  			pizzas.push(menu[i])
+  			pizzas.push(menu[i]);
       }
     }  
   } else {
@@ -156,7 +156,7 @@ var searchPizzaPrice = function searchPizzaPrice(price, increment, lower)
       if (menu[i].price > price)
       {
   			menu[i].price+=increment;
-  			pizzas.push(menu[i])
+  			pizzas.push(menu[i]);
       }
     }
   }
